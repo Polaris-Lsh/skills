@@ -6,7 +6,7 @@ metadata:
   version: 1.0.0
 ---
 
-# 中文优先的 STE 启发式写作
+# Simplified Technical Language
 
 ## 目标
 
