@@ -1,5 +1,5 @@
 ---
-name: Simplified Technical Language
+name: simplified-technical-language
 description: "Write, rewrite, and review Chinese-first technical prose with executable ASD-STE100-inspired rules, retaining or generating English only when necessary. This skill should be used for 中文技术写作、简明中文、技术笔记、README、设计说明、实验记录、操作步骤、错误说明、提示词、报告润色、术语统一、语言规范检查、中英混写边界、STE 中文适配， and bilingual technical rewriting. It preserves technical meaning and never claims official ASD-STE100 compliance for Chinese. It is not for literary, marketing, or persuasive copy."
 agent_created: true
 metadata:
@@ -20,7 +20,7 @@ metadata:
 - **改写**：保留事实和技术含义，只调整表达。默认只输出最终文本。
 - **检查**：报告问题、位置、依据和建议，不直接改原文。
 - **对照**：只列出实际改动，给出原文、改写和规则编号。
-- **必要英译**：先还原事实和逻辑，再写 STE 风格英文。需要完整英文规则时，配合使用 `asd-ste100` Skill。
+- **必要英译**：先还原事实和逻辑，再写 STE 风格英文。需要完整英文规则时，配合使用可用的英文 STE 规范，不得声称官方合规。
 
 未指定任务时，根据动词判断：出现“检查、审查、lint”时执行检查；出现“对照、依据、为什么”时执行对照；其余润色请求执行改写。
 
