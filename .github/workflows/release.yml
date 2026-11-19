@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Validate release version
+        run: python scripts/validate_repo.py --skill simplified-technical-language --tag "$GITHUB_REF_NAME"
+
+      - name: Run checker self-tests
+        run: python simplified-technical-language/scripts/check_writing.py --selftest
+
+      - name: Build installable ZIP
+        run: |
+          mkdir -p dist
+          zip -r dist/simplified-technical-language.zip simplified-technical-language \
+            -x "*/__pycache__/*" "*.pyc" "*.DS_Store"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/*.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/*.zip \
+              --title "Simplified Technical Language $GITHUB_REF_NAME" \
+              --generate-notes \
+              --verify-tag
+          fi
