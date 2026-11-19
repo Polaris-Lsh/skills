@@ -4,6 +4,10 @@ All notable changes to this repository are documented here. Releases use semanti
 
 ## [Unreleased]
 
+### Changed
+
+- Updated pinned GitHub Actions to the current Node 24-compatible releases.
+
 ## [1.0.1] - 2026-11-19
 
 ### Added
